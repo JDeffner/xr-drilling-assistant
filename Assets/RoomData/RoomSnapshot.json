@@ -1,0 +1,1543 @@
+{
+ "type": "scene_META",
+ "version": 1,
+ "spatialEntities": [
+  {
+   "uuid": "47ae2575-a81a-6c49-ca5f-7bc2d59eb7ca",
+   "roomLayoutMETA": {
+    "floorUuid": "4370b490-8e5d-fb52-27e1-4145ba0898ab",
+    "ceilingUuid": "28249b3f-fc81-205a-4342-6296d30c03d3",
+    "wallUuids": [
+     "7abf1ac2-4a55-f5ee-1f7d-a463ee9cd361",
+     "0f63ed06-eab6-374c-ba46-3429d930e5c8",
+     "5515f4d5-8687-1b5b-ae52-909c45a4d9b0",
+     "52a757c1-1de3-d209-e9e0-b2238f52c763",
+     "07734695-46ef-4095-24e6-70a3407bf879",
+     "0967a034-3620-cc6f-b54a-6750b9486ba7",
+     "a69a81fd-ff3f-b23f-ab03-12d693f5ca7f",
+     "b2843311-3b44-1014-be67-6c6f4f32e69f"
+    ]
+   },
+   "spaceContainerMETA": {
+    "uuids": [
+     "7abf1ac2-4a55-f5ee-1f7d-a463ee9cd361",
+     "0f63ed06-eab6-374c-ba46-3429d930e5c8",
+     "5515f4d5-8687-1b5b-ae52-909c45a4d9b0",
+     "52a757c1-1de3-d209-e9e0-b2238f52c763",
+     "07734695-46ef-4095-24e6-70a3407bf879",
+     "28249b3f-fc81-205a-4342-6296d30c03d3",
+     "0967a034-3620-cc6f-b54a-6750b9486ba7",
+     "88af3987-ed6b-ebec-0ea8-75e780ebfe67",
+     "4370b490-8e5d-fb52-27e1-4145ba0898ab",
+     "a69a81fd-ff3f-b23f-ab03-12d693f5ca7f",
+     "b2843311-3b44-1014-be67-6c6f4f32e69f",
+     "80a878ba-9250-0024-39b8-b320d2a33d5d",
+     "7d05a0d1-148e-860f-4393-a41e19eb8b12",
+     "57d474e3-c907-c621-3706-293358f81833",
+     "ad8b58f4-3049-f06f-4998-dd13b203fbef",
+     "60bd6ea4-87bc-96ca-c804-fae9b0076fef",
+     "65fe0475-84fa-d309-97e7-48bba3c07f12",
+     "1bbd50bf-63db-2033-f9a1-40ae24ceb1f9",
+     "e068becb-2efc-5762-6a0e-6387896d1d29"
+    ]
+   }
+  },
+  {
+   "uuid": "7abf1ac2-4a55-f5ee-1f7d-a463ee9cd361",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -5.66076869e-06,
+     "y": 0.781841815,
+     "z": -3.22080195e-05,
+     "w": -0.623477042
+    },
+    "position": {
+     "x": 0.779737234,
+     "y": 1.0212642,
+     "z": 0.450399399
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "vz+/v04kgb/HP78/TiSBv8c/vz8yU4E/vz+/vzJTgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.49413288,
+     "y": -1.00892043
+    },
+    "extent": {
+     "width": 2.98826671,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "0f63ed06-eab6-374c-ba46-3429d930e5c8",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.59005574e-05,
+     "y": 0.997440577,
+     "z": -1.98761918e-05,
+     "w": 0.0715015829
+    },
+    "position": {
+     "x": -0.787513256,
+     "y": 1.02306747,
+     "z": 1.72912383
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "eq2fvxFggb9Drp8/EWCBv0Ounz9uF4E/eq2fv24XgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.24748158,
+     "y": -1.01074421
+    },
+    "extent": {
+     "width": 2.49498701,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "5515f4d5-8687-1b5b-ae52-909c45a4d9b0",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 3.227243e-05,
+     "y": -0.636464357,
+     "z": -5.06136803e-06,
+     "w": -0.771306276
+    },
+    "position": {
+     "x": -1.79776561,
+     "y": 1.02322042,
+     "z": 0.390040815
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "7mCXv5togb8fYJc/m2iBvx9glz/kDoE/7mCXv+QOgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.18264556,
+     "y": -1.01100481
+    },
+    "extent": {
+     "width": 2.36526632,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "52a757c1-1de3-d209-e9e0-b2238f52c763",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.89252532e-05,
+     "y": 0.106787711,
+     "z": -2.66170537e-05,
+     "w": -0.994282
+    },
+    "position": {
+     "x": 0.677121341,
+     "y": 1.02060187,
+     "z": -1.1008215
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "7v3jvvQQgb++/eM+9BCBv7794z6LZoE/7v3jvotmgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.445296705,
+     "y": -1.00832987
+    },
+    "extent": {
+     "width": 0.890592,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "07734695-46ef-4095-24e6-70a3407bf879",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 3.21617554e-05,
+     "y": -0.612069368,
+     "z": -6.16241505e-06,
+     "w": -0.790804267
+    },
+    "position": {
+     "x": -1.03731358,
+     "y": 1.02183402,
+     "z": -1.25524151
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "Jb4Zv0k8gb8AwBk/STyBvwDAGT81O4E/Jb4ZvzU7gT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.600557625,
+     "y": -1.00965226
+    },
+    "extent": {
+     "width": 1.2011435,
+     "height": 2.01927161
+    }
+   }
+  },
+  {
+   "uuid": "28249b3f-fc81-205a-4342-6296d30c03d3",
+   "semanticLabelMETA": "CEILING",
+   "locatableMETA": {
+    "orientation": {
+     "x": -0.545372665,
+     "y": -0.450052232,
+     "z": 0.450045,
+     "w": -0.545418322
+    },
+    "position": {
+     "x": -0.413304269,
+     "y": 2.03154111,
+     "z": 0.0605069324
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "+vISP3lkZr/L6+I/tzJTv1Wq1T9Y6tI+0sGtP/RQzz6yIqs/csulPw0m07/KAJk/RW3iv1T9pb+Opxg/Ov2lvw=="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.76895964,
+     "y": -1.29679346
+    },
+    "extent": {
+     "width": 3.54178047,
+     "height": 2.59206462
+    }
+   }
+  },
+  {
+   "uuid": "0967a034-3620-cc6f-b54a-6750b9486ba7",
+   "semanticLabelMETA": "INVISIBLE_WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.81626583e-05,
+     "y": 0.136825651,
+     "z": -2.71873523e-05,
+     "w": -0.990595222
+    },
+    "position": {
+     "x": -0.289172739,
+     "y": 1.02093244,
+     "z": -1.66835785
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "TOwevyQegb801x4/JB6BvzTXHj9bWYE/TOwev1tZgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.620793104,
+     "y": -1.00873232
+    },
+    "extent": {
+     "width": 1.24126434,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "88af3987-ed6b-ebec-0ea8-75e780ebfe67",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.545404434,
+     "y": -0.450061888,
+     "z": -0.450068921,
+     "w": -0.545358896
+    },
+    "position": {
+     "x": -1.74220932,
+     "y": 1.88465309,
+     "z": 0.475390375
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "7hTMvqD2i73gFMw+APiLvfIUzD6g9os93hTMvhD4iz0="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.398597181,
+     "y": -0.0683441162
+    },
+    "extent": {
+     "width": 0.797194481,
+     "height": 0.136688352
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.3985973,
+     "y": -0.068351388,
+     "z": -0.488440454
+    },
+    "extent": {
+     "width": 0.797194541,
+     "height": 0.136692882,
+     "depth": 0.488469183
+    }
+   }
+  },
+  {
+   "uuid": "4370b490-8e5d-fb52-27e1-4145ba0898ab",
+   "semanticLabelMETA": "FLOOR",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.55287683,
+     "y": -0.440850347,
+     "z": -0.440858215,
+     "w": -0.552831411
+    },
+    "position": {
+     "x": -0.453256607,
+     "y": 0.0122678299,
+     "z": 0.0839102119
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "M44VPzIepD+AzuO/aPuZP2fbyb/+UaS/I6S0P0BOpL8VcrM/vkPJvpZc2z9khMe+IE/jP3abWT8jQRM/FoRiPw=="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.77973938,
+     "y": -1.2837522
+    },
+    "extent": {
+     "width": 3.55559158,
+     "height": 2.56592369
+    }
+   }
+  },
+  {
+   "uuid": "a69a81fd-ff3f-b23f-ab03-12d693f5ca7f",
+   "semanticLabelMETA": "INVISIBLE_WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.84458313e-05,
+     "y": 0.123232365,
+     "z": -2.69226166e-05,
+     "w": -0.992377877
+    },
+    "position": {
+     "x": -1.38066912,
+     "y": 1.02254283,
+     "z": -0.722493172
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "eGdLvlJTgb9YlEs+UlOBv1iUSz4uJIE/eGdLvi4kgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.198636889,
+     "y": -1.01035523
+    },
+    "extent": {
+     "width": 0.397444963,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "b2843311-3b44-1014-be67-6c6f4f32e69f",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -5.44583327e-06,
+     "y": 0.778429508,
+     "z": -3.21985463e-05,
+     "w": -0.627732038
+    },
+    "position": {
+     "x": 0.275027543,
+     "y": 1.02079,
+     "z": -1.34778774
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "OKgfvh4Ygb+wsB8+HhiBv7CwHz5iX4E/OKgfvmJfgT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.155915141,
+     "y": -1.0085485
+    },
+    "extent": {
+     "width": 0.311862588,
+     "height": 2.01927185
+    }
+   }
+  },
+  {
+   "uuid": "80a878ba-9250-0024-39b8-b320d2a33d5d",
+   "semanticLabelMETA": "GLOBAL_MESH",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.45389837,
+     "y": 0.542215824,
+     "z": 0.542170227,
+     "w": -0.453905106
+    },
+    "position": {
+     "x": -0.225462645,
+     "y": 1.05966568,
+     "z": -0.0765987933
+    }
+   }
+  },
+  {
+   "uuid": "7d05a0d1-148e-860f-4393-a41e19eb8b12",
+   "semanticLabelMETA": "TABLE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.440865666,
+     "y": 0.552864552,
+     "z": 0.552819133,
+     "w": -0.440873563
+    },
+    "position": {
+     "x": 0.593458533,
+     "y": 0.743394315,
+     "z": -0.052321706
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "LspPv88blb4wyk8/0huVvi7KTz/GG5U+MMpPv8wblT4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.811678886,
+     "y": -0.291227877
+    },
+    "extent": {
+     "width": 1.62335777,
+     "height": 0.582455575
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.811678886,
+     "y": -0.291227877,
+     "z": -0.73189044
+    },
+    "extent": {
+     "width": 1.62335777,
+     "height": 0.582455456,
+     "depth": 0.73189044
+    }
+   }
+  },
+  {
+   "uuid": "57d474e3-c907-c621-3706-293358f81833",
+   "semanticLabelMETA": "BED",
+   "locatableMETA": {
+    "orientation": {
+     "x": -0.050571233,
+     "y": 0.705311418,
+     "z": 0.705283403,
+     "w": 0.050534606
+    },
+    "position": {
+     "x": -0.655064642,
+     "y": 0.534263611,
+     "z": 1.11491525
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "B9ygv1P9H78C3KA/Uv0fvwLcoD9c/R8/Btygv1j9Hz8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.2567147,
+     "y": -0.624959171
+    },
+    "extent": {
+     "width": 2.51342869,
+     "height": 1.24991894
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -1.25671482,
+     "y": -0.62495923,
+     "z": -0.521312475
+    },
+    "extent": {
+     "width": 2.51342869,
+     "height": 1.24991882,
+     "depth": 0.521312594
+    }
+   }
+  },
+  {
+   "uuid": "ad8b58f4-3049-f06f-4998-dd13b203fbef",
+   "semanticLabelMETA": "WINDOW_FRAME",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.59637782e-05,
+     "y": 0.997441232,
+     "z": -1.991307e-05,
+     "w": 0.0714928508
+    },
+    "position": {
+     "x": -0.141539946,
+     "y": 1.23643255,
+     "z": 1.82189691
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "ZGbmvpyZ2b5oZuY+nJnZvmhm5j6cmdk+ZGbmvpqZ2T4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.449999928,
+     "y": -0.425000072
+    },
+    "extent": {
+     "width": 0.9,
+     "height": 0.850000143
+    }
+   }
+  },
+  {
+   "uuid": "60bd6ea4-87bc-96ca-c804-fae9b0076fef",
+   "semanticLabelMETA": "WALL_ART",
+   "locatableMETA": {
+    "orientation": {
+     "x": -5.65706159e-06,
+     "y": 0.781827,
+     "z": -3.21832376e-05,
+     "w": -0.623495579
+    },
+    "position": {
+     "x": 0.567802429,
+     "y": 1.49053264,
+     "z": 1.37987554
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "SMOIvnuktr5Iw4g+e6S2vkjDiD57pLY+SMOIvnuktj4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.267114878,
+     "y": -0.356723636
+    },
+    "extent": {
+     "width": 0.534229755,
+     "height": 0.713447273
+    }
+   }
+  },
+  {
+   "uuid": "65fe0475-84fa-d309-97e7-48bba3c07f12",
+   "semanticLabelMETA": "TABLE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -0.0674164,
+     "y": 0.703901172,
+     "z": 0.703873873,
+     "w": 0.067379117
+    },
+    "position": {
+     "x": -1.50894928,
+     "y": 0.552170277,
+     "z": 0.159060389
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "ONlzvuz4G7442XM+7PgbvjDZcz78+Bs+ONlzvvj4Gz4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.238133311,
+     "y": -0.152316749
+    },
+    "extent": {
+     "width": 0.476266623,
+     "height": 0.304633737
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.238133311,
+     "y": -0.152316749,
+     "z": -0.539079368
+    },
+    "extent": {
+     "width": 0.476266503,
+     "height": 0.304633737,
+     "depth": 0.539079428
+    }
+   }
+  },
+  {
+   "uuid": "1bbd50bf-63db-2033-f9a1-40ae24ceb1f9",
+   "semanticLabelMETA": "WALL_ART",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.60085562e-05,
+     "y": 0.997440219,
+     "z": -1.98735561e-05,
+     "w": 0.0715055764
+    },
+    "position": {
+     "x": -0.861164749,
+     "y": 1.28440654,
+     "z": 1.71817195
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "wJcdvqIyOb7Ylx0+ojI5vtiXHT6hMjk+wJcdvqEyOT4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.153899193,
+     "y": -0.180857211
+    },
+    "extent": {
+     "width": 0.307798743,
+     "height": 0.361714423
+    }
+   }
+  },
+  {
+   "uuid": "e068becb-2efc-5762-6a0e-6387896d1d29",
+   "semanticLabelMETA": "SCREEN",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.415074527,
+     "y": 0.572481394,
+     "z": 0.572436213,
+     "w": -0.41508463
+    },
+    "position": {
+     "x": 0.626006842,
+     "y": 1.181,
+     "z": 0.26321435
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.30795756,
+     "y": -0.0550000668,
+     "z": -0.358423412
+    },
+    "extent": {
+     "width": 0.61591512,
+     "height": 0.110000134,
+     "depth": 0.358423412
+    }
+   }
+  },
+  {
+   "uuid": "c92a6a76-11d7-883b-5e30-9ba3a0da2540",
+   "roomLayoutMETA": {
+    "floorUuid": "70542bbf-8a28-95f9-cf17-dab5a9c1401e",
+    "ceilingUuid": "79360591-b96a-631f-c68d-3a87843049c1",
+    "wallUuids": [
+     "efac1283-b476-8aaf-3abe-d54b6d5fd533",
+     "34d98f95-6137-c766-87e3-e12330bbb60e",
+     "7d7c6fd7-32c8-8b7b-542e-5b563015255b",
+     "09eedc1d-90f1-d145-6fe7-32aa03f7b43e",
+     "7a3477c7-345c-b838-c384-420094dea6f3",
+     "aa0d0bb5-6ee2-b0b3-4050-f165f819d970",
+     "f83a5b14-b8da-8b8e-7cc7-35bef4d47e75",
+     "74aec65a-777a-7b2b-72ad-ecc009bc8612",
+     "90887f8e-9e7b-e9a8-da44-a4de482c9b73",
+     "8e635fb7-0a9a-7273-f8d8-5af508fb0777"
+    ]
+   },
+   "spaceContainerMETA": {
+    "uuids": [
+     "efac1283-b476-8aaf-3abe-d54b6d5fd533",
+     "34d98f95-6137-c766-87e3-e12330bbb60e",
+     "7d7c6fd7-32c8-8b7b-542e-5b563015255b",
+     "09eedc1d-90f1-d145-6fe7-32aa03f7b43e",
+     "54831571-8def-b164-bed5-4a766d1c616c",
+     "7a3477c7-345c-b838-c384-420094dea6f3",
+     "0b225bbb-6caf-83e8-565a-d6843610c28b",
+     "aa0d0bb5-6ee2-b0b3-4050-f165f819d970",
+     "f83a5b14-b8da-8b8e-7cc7-35bef4d47e75",
+     "70542bbf-8a28-95f9-cf17-dab5a9c1401e",
+     "74aec65a-777a-7b2b-72ad-ecc009bc8612",
+     "6b464405-c152-c39e-d48c-9ff60d0ccd21",
+     "79360591-b96a-631f-c68d-3a87843049c1",
+     "90887f8e-9e7b-e9a8-da44-a4de482c9b73",
+     "d298e493-7fa0-27c0-43e4-9eec025ebc85",
+     "8e635fb7-0a9a-7273-f8d8-5af508fb0777",
+     "c975c86a-1739-c27f-00f6-45c3bc64ef15",
+     "206b593f-11e2-3df7-8088-f08cdea4223a",
+     "4d89ca2c-9c1b-25f4-4e68-750c8727812b",
+     "aefeb3dd-3b6b-5016-007e-a112b47350b1",
+     "5632db9c-d2c8-a61f-759b-e0d8af8cca7a",
+     "60f28aed-45ab-da0d-54ae-ed4ec4ee3f19",
+     "8302df62-d0a3-b635-0fea-8e67538eac93",
+     "3143390a-142d-9b6d-cc5a-3abe23eb448f",
+     "0bc1f707-751c-e0fe-8df0-d01659782ed1"
+    ]
+   }
+  },
+  {
+   "uuid": "efac1283-b476-8aaf-3abe-d54b6d5fd533",
+   "semanticLabelMETA": "INVISIBLE_WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.85143217e-05,
+     "y": 0.124149859,
+     "z": -2.6891008e-05,
+     "w": -0.992263615
+    },
+    "position": {
+     "x": -3.38898849,
+     "y": -1.46264422,
+     "z": -3.94270039
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "yEAWvxQOjb9ISBY/FA6Nv0hIFj/YEY0/yEAWv9gRjT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.586926,
+     "y": -1.10199213
+    },
+    "extent": {
+     "width": 1.17396641,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "34d98f95-6137-c766-87e3-e12330bbb60e",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.84774435e-05,
+     "y": 0.124174476,
+     "z": -2.68936419e-05,
+     "w": -0.992260456
+    },
+    "position": {
+     "x": -1.65558326,
+     "y": -1.46123838,
+     "z": -1.64897883
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "ND/+viA2jb80Tf4+IDaNvzRN/j7N6Yw/ND/+vs3pjD8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.496575952,
+     "y": -1.10321426
+    },
+    "extent": {
+     "width": 0.993258715,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "7d7c6fd7-32c8-8b7b-542e-5b563015255b",
+   "semanticLabelMETA": "INVISIBLE_WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -6.02708405e-06,
+     "y": 0.789467,
+     "z": -3.2089647e-05,
+     "w": -0.613793254
+    },
+    "position": {
+     "x": -2.34800529,
+     "y": -1.46304083,
+     "z": 1.33189809
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "gOeovuz3jL/MtKg+7PeMv8y0qD4AKI0/gOeovgAojT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.329891205,
+     "y": -1.10131598
+    },
+    "extent": {
+     "width": 0.659395576,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "09eedc1d-90f1-d145-6fe7-32aa03f7b43e",
+   "semanticLabelMETA": "INVISIBLE_WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -5.95768688e-06,
+     "y": 0.789491296,
+     "z": -3.20571198e-05,
+     "w": -0.613761783
+    },
+    "position": {
+     "x": -1.51079559,
+     "y": -1.46094036,
+     "z": -0.203816116
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "lbWuv5w9jb/3sK4/nD2Nv/ewrj9R4ow/lbWuv1HijD8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.36491644,
+     "y": -1.10344267
+    },
+    "extent": {
+     "width": 2.72969198,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "54831571-8def-b164-bed5-4a766d1c616c",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.348772764,
+     "y": 0.615125477,
+     "z": 0.615081668,
+     "w": -0.348787785
+    },
+    "position": {
+     "x": -2.50861049,
+     "y": -0.68063432,
+     "z": 1.13504112
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "cGpevuDaEr5gal4+8NoSvnBqXj7Q2hI+UGpevuDaEj4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.217202902,
+     "y": -0.143413305
+    },
+    "extent": {
+     "width": 0.434405804,
+     "height": 0.286826372
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.217202902,
+     "y": -0.143413305,
+     "z": -1.12328029
+    },
+    "extent": {
+     "width": 0.434405804,
+     "height": 0.286826134,
+     "depth": 1.12328029
+    }
+   }
+  },
+  {
+   "uuid": "7a3477c7-345c-b838-c384-420094dea6f3",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.67132018e-05,
+     "y": 0.993799806,
+     "z": -1.88133017e-05,
+     "w": 0.111184835
+    },
+    "position": {
+     "x": -3.84690952,
+     "y": -1.46323144,
+     "z": 1.32999742
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "EhC6vxr0jL+YH7o/GvSMv5gfuj/TK40/EhC6v9MrjT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.45361543,
+     "y": -1.10119939
+    },
+    "extent": {
+     "width": 2.90770459,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "0b225bbb-6caf-83e8-565a-d6843610c28b",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.558703423,
+     "y": -0.433442235,
+     "z": -0.433450758,
+     "w": -0.558658123
+    },
+    "position": {
+     "x": -4.03322077,
+     "y": -0.754315257,
+     "z": -3.31194925
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "4AxFvwCv8L3sDEU/AK/wvfQMRT/ArvA93AxFv4Cu8D0="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.769727707,
+     "y": -0.117521286
+    },
+    "extent": {
+     "width": 1.53945661,
+     "height": 0.235042095
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.769727468,
+     "y": -0.117521763,
+     "z": -0.650000095
+    },
+    "extent": {
+     "width": 1.53945589,
+     "height": 0.235042095,
+     "depth": 0.650000572
+    }
+   }
+  },
+  {
+   "uuid": "aa0d0bb5-6ee2-b0b3-4050-f165f819d970",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 3.20835497e-05,
+     "y": -0.612993896,
+     "z": -6.01045394e-06,
+     "w": -0.790087759
+    },
+    "position": {
+     "x": -4.61141539,
+     "y": -1.46390712,
+     "z": -1.53939915
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "BFsowEDjjL+EWChAQOOMv4RYKECrPI0/BFsowKs8jT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -2.63055515,
+     "y": -1.10068512
+    },
+    "extent": {
+     "width": 5.26095772,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "f83a5b14-b8da-8b8e-7cc7-35bef4d47e75",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.84761229e-05,
+     "y": 0.123900414,
+     "z": -2.69081283e-05,
+     "w": -0.992294669
+    },
+    "position": {
+     "x": -2.19860649,
+     "y": -1.4615891,
+     "z": -3.88519049
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "+K4Uv64ujb+ErRQ/ri6Nv4StFD8+8Yw/+K4Uvz7xjD8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.580794811,
+     "y": -1.10298705
+    },
+    "extent": {
+     "width": 1.16156745,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "70542bbf-8a28-95f9-cf17-dab5a9c1401e",
+   "semanticLabelMETA": "FLOOR",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.70165664,
+     "y": 0.0877475739,
+     "z": 0.0877094865,
+     "w": -0.701630592
+    },
+    "position": {
+     "x": -2.96920156,
+     "y": -2.56449962,
+     "z": -1.24459517
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "zDrUv4DAIED4zNW/yvIvwKxCnj/0HivAXEmeP2rrAMCaq9U/+uwAwFbO1T8sGTc/eFYtP0gnNz/wcy0/4fIvQBDR97597C9AANn3vk69IEA="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.67031765,
+     "y": -2.74919367
+    },
+    "extent": {
+     "width": 3.34067702,
+     "height": 5.49839306
+    }
+   }
+  },
+  {
+   "uuid": "74aec65a-777a-7b2b-72ad-ecc009bc8612",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -6.00765452e-06,
+     "y": 0.78944,
+     "z": -3.21070911e-05,
+     "w": -0.613827884
+    },
+    "position": {
+     "x": -1.88625693,
+     "y": -1.46134174,
+     "z": -2.75685954
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "RimCv6w0jb/VKII/rDSNv9Uogj9B64w/RimCv0HrjD8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.01688457,
+     "y": -1.10316992
+    },
+    "extent": {
+     "width": 2.03375578,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "6b464405-c152-c39e-d48c-9ff60d0ccd21",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.558698714,
+     "y": -0.433448315,
+     "z": -0.433456719,
+     "w": -0.558653474
+    },
+    "position": {
+     "x": -4.36555862,
+     "y": -0.780020356,
+     "z": -2.01681709
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "hDZtvwCm771+Nm0/AKXvvXo2bT+Ape89hDZtv0Ck7z0="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.926613092,
+     "y": -0.117015839
+    },
+    "extent": {
+     "width": 1.85322583,
+     "height": 0.234030724
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.926613092,
+     "y": -0.117015362,
+     "z": -1.62515497
+    },
+    "extent": {
+     "width": 1.85322583,
+     "height": 0.23402977,
+     "depth": 1.62515545
+    }
+   }
+  },
+  {
+   "uuid": "79360591-b96a-631f-c68d-3a87843049c1",
+   "semanticLabelMETA": "CEILING",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.0786004961,
+     "y": 0.702709377,
+     "z": -0.702735901,
+     "w": 0.078638196
+    },
+    "position": {
+     "x": -2.98890495,
+     "y": -0.360402137,
+     "z": -1.27758121
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "EObIPpy2H0Bgt8U+duQuQNBnRr8k/SxAsMg4v/h9Kz9TfNu/NtckPzNJ0r/4bQXAz+uav4G0BMCatJi/UuQuwBh72z9I5C7A8HDIP8isIUA="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -1.71473157,
+     "y": -2.73268557
+    },
+    "extent": {
+     "width": 3.42942572,
+     "height": 5.46537971
+    }
+   }
+  },
+  {
+   "uuid": "90887f8e-9e7b-e9a8-da44-a4de482c9b73",
+   "semanticLabelMETA": "WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.69054945e-05,
+     "y": 0.992260456,
+     "z": -1.84445162e-05,
+     "w": 0.124175221
+    },
+    "position": {
+     "x": -2.05674171,
+     "y": -1.46150565,
+     "z": 1.06556964
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "OEBdviQqjb+w0V0+JCqNv7DRXT7H9Yw/OEBdvsf1jD8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.216065288,
+     "y": -1.10284853
+    },
+    "extent": {
+     "width": 0.432685494,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "d298e493-7fa0-27c0-43e4-9eec025ebc85",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.434020877,
+     "y": 0.558254,
+     "z": 0.558208585,
+     "w": -0.43402949
+    },
+    "position": {
+     "x": -1.92873895,
+     "y": -0.601876616,
+     "z": -2.92482185
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "RD02vwCZpb1CPTY/AJmlvUI9Nj8AmaU9QD02vwCZpT0="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.711872339,
+     "y": -0.0808582306
+    },
+    "extent": {
+     "width": 1.42374456,
+     "height": 0.161716461
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.711872339,
+     "y": -0.080858469,
+     "z": -1.15
+    },
+    "extent": {
+     "width": 1.42374456,
+     "height": 0.1617167,
+     "depth": 1.14999986
+    }
+   }
+  },
+  {
+   "uuid": "8e635fb7-0a9a-7273-f8d8-5af508fb0777",
+   "semanticLabelMETA": "INVISIBLE_WALL_FACE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 3.20961408e-05,
+     "y": -0.613814771,
+     "z": -6.00197382e-06,
+     "w": -0.789450109
+    },
+    "position": {
+     "x": -2.79080868,
+     "y": -1.46212924,
+     "z": -3.91302681
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "gO7yvfQdjb9g9/I99B2Nv2D38j35AY0/gO7yvfkBjT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.118618965,
+     "y": -1.1024766
+    },
+    "extent": {
+     "width": 0.237254858,
+     "height": 2.20409918
+    }
+   }
+  },
+  {
+   "uuid": "c975c86a-1739-c27f-00f6-45c3bc64ef15",
+   "semanticLabelMETA": "GLOBAL_MESH",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.4532004,
+     "y": 0.542799354,
+     "z": 0.542753637,
+     "w": -0.453207403
+    },
+    "position": {
+     "x": -3.37274814,
+     "y": -0.866722703,
+     "z": -1.03515303
+    }
+   }
+  },
+  {
+   "uuid": "206b593f-11e2-3df7-8088-f08cdea4223a",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.558699548,
+     "y": -0.433447242,
+     "z": -0.433455706,
+     "w": -0.558654249
+    },
+    "position": {
+     "x": -4.87389803,
+     "y": -1.71678722,
+     "z": 0.334029377
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "LOEDv4AUVb4y4QM/QBRVvizhAz/gFFU+NOEDv8AUVT4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.515155077,
+     "y": -0.208086014
+    },
+    "extent": {
+     "width": 1.03031,
+     "height": 0.416173458
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.5151546,
+     "y": -0.208086014,
+     "z": -0.789717197
+    },
+    "extent": {
+     "width": 1.03030956,
+     "height": 0.416172981,
+     "depth": 0.789717197
+    }
+   }
+  },
+  {
+   "uuid": "4d89ca2c-9c1b-25f4-4e68-750c8727812b",
+   "semanticLabelMETA": "TABLE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.434177101,
+     "y": 0.558132529,
+     "z": 0.55808717,
+     "w": -0.434185684
+    },
+    "position": {
+     "x": -2.38740897,
+     "y": -1.79944444,
+     "z": -3.3475616
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "/E8Rv2h/0r4EUBE/YH/SvgBQET9of9I+BFARv2h/0j4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.567627192,
+     "y": -0.411128283
+    },
+    "extent": {
+     "width": 1.13525438,
+     "height": 0.822256565
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.567626715,
+     "y": -0.411128283,
+     "z": -0.764724731
+    },
+    "extent": {
+     "width": 1.13525391,
+     "height": 0.822256565,
+     "depth": 0.76472497
+    }
+   }
+  },
+  {
+   "uuid": "aefeb3dd-3b6b-5016-007e-a112b47350b1",
+   "semanticLabelMETA": "TABLE",
+   "locatableMETA": {
+    "orientation": {
+     "x": -0.0786446929,
+     "y": 0.702735186,
+     "z": 0.702708542,
+     "w": 0.0786070228
+    },
+    "position": {
+     "x": -3.38705969,
+     "y": -1.8261838,
+     "z": 0.254039109
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "QPYWv6QlOb9A9hY/nCU5vzz2Fj+cJTk/SPYWv5wlOT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.589695454,
+     "y": -0.7232306
+    },
+    "extent": {
+     "width": 1.17939043,
+     "height": 1.44646072
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.589695215,
+     "y": -0.7232306,
+     "z": -0.74038434
+    },
+    "extent": {
+     "width": 1.17939019,
+     "height": 1.44646049,
+     "depth": 0.740383863
+    }
+   }
+  },
+  {
+   "uuid": "5632db9c-d2c8-a61f-759b-e0d8af8cca7a",
+   "semanticLabelMETA": "WALL_ART",
+   "locatableMETA": {
+    "orientation": {
+     "x": 1.84945675e-05,
+     "y": 0.123924911,
+     "z": -2.68896947e-05,
+     "w": -0.992291749
+    },
+    "position": {
+     "x": -2.18799973,
+     "y": -0.798120618,
+     "z": -3.88381195
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "QIEQvngpLL5QgRA+eCksvjCBED6gKSw+QIEQvqApLD4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.14111805,
+     "y": -0.168126941
+    },
+    "extent": {
+     "width": 0.282236338,
+     "height": 0.336254478
+    }
+   }
+  },
+  {
+   "uuid": "60f28aed-45ab-da0d-54ae-ed4ec4ee3f19",
+   "semanticLabelMETA": "WALL_ART",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.67131982e-05,
+     "y": 0.993799567,
+     "z": -1.88001286e-05,
+     "w": 0.111186504
+    },
+    "position": {
+     "x": -3.56212616,
+     "y": -0.60510397,
+     "z": 1.39341497
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "wHBavlhAHr7wcFo+UEAevgBxWj5gQB4+wHBavlhAHj4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.213320732,
+     "y": -0.154542327
+    },
+    "extent": {
+     "width": 0.426642418,
+     "height": 0.309084773
+    }
+   }
+  },
+  {
+   "uuid": "8302df62-d0a3-b635-0fea-8e67538eac93",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.434020251,
+     "y": 0.55825454,
+     "z": 0.558209062,
+     "w": -0.434028924
+    },
+    "position": {
+     "x": -2.10785246,
+     "y": -0.802346647,
+     "z": -2.2582202
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "1LvzvsCbub3Uu/M+wJu5vdS78z6Am7k93LvzvoCbuT0="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.476042628,
+     "y": -0.0906291
+    },
+    "extent": {
+     "width": 0.952085,
+     "height": 0.181257725
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.47604239,
+     "y": -0.0906300545,
+     "z": -1.76186931
+    },
+    "extent": {
+     "width": 0.95208478,
+     "height": 0.181258678,
+     "depth": 1.76186955
+    }
+   }
+  },
+  {
+   "uuid": "3143390a-142d-9b6d-cc5a-3abe23eb448f",
+   "semanticLabelMETA": "WINDOW_FRAME",
+   "locatableMETA": {
+    "orientation": {
+     "x": -2.66934458e-05,
+     "y": 0.993799567,
+     "z": -1.88067152e-05,
+     "w": 0.111186862
+    },
+    "position": {
+     "x": -4.67937326,
+     "y": -1.11993515,
+     "z": 1.13992941
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "0MwMv5iZGb/QzAw/mJkZv9DMDD+YmRk/1MwMv5iZGT8="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.550000429,
+     "y": -0.599999905
+    },
+    "extent": {
+     "width": 1.10000062,
+     "height": 1.19999981
+    }
+   }
+  },
+  {
+   "uuid": "0bc1f707-751c-e0fe-8df0-d01659782ed1",
+   "semanticLabelMETA": "STORAGE",
+   "locatableMETA": {
+    "orientation": {
+     "x": 0.558713257,
+     "y": -0.433429599,
+     "z": -0.433438122,
+     "w": -0.558667898
+    },
+    "position": {
+     "x": -4.54423809,
+     "y": -1.88756108,
+     "z": -1.07154679
+    }
+   },
+   "boundary2DMETA": {
+    "vertices": "0TLKvgBHNr7RMso+AEc2vssyyj4gRzY+1DLKvsBGNj4="
+   },
+   "bounded2DMETA": {
+    "offset": {
+     "x": -0.394919038,
+     "y": -0.178005219
+    },
+    "extent": {
+     "width": 0.789837956,
+     "height": 0.356010914
+    }
+   },
+   "bounded3DMETA": {
+    "offset": {
+     "x": -0.394918948,
+     "y": -0.178005219,
+     "z": -0.679982662
+    },
+    "extent": {
+     "width": 0.789837897,
+     "height": 0.356010437,
+     "depth": 0.679982662
+    }
+   }
+  }
+ ]
+}
