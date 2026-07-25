@@ -98,6 +98,15 @@ adb install DrillingAssistant.apk
 
 Standard Android/Quest build (IL2CPP). The APK falls back to the bundled room snapshot if the OS never delivers live scene data, a known Quest quirk this project works around.
 
+## License
+
+[MIT](LICENSE), covering the application code in `Assets/Scripts` and the
+project configuration in this repository.
+
+The Meta XR Core SDK and the Mixed Reality Utility Kit are not vendored here.
+They are pulled as Unity packages via `Packages/manifest.json` and remain under
+Meta's own license terms.
+
 ## Project layout
 
 ```
