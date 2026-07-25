@@ -81,3 +81,7 @@ crashlytics-build.properties
 concept/
 /JoDeffOverlay_BackUpThisFolder_ButDontShipItWithYourGame
 /AddAPKHere_BackUpThisFolder_ButDontShipItWithYourGame
+
+# Unity leaves this behind after a scripting-assembly build; it is a build
+# artifact, not source, and it was committed to the public repo by accident.
+TempAssembly.dll
