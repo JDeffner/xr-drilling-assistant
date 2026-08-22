@@ -126,7 +126,10 @@ namespace DrillingAssistant
                 var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
                 ring.name = $"Marker_{m.Id}";
                 Object.Destroy(ring.GetComponent<Collider>());
-                ring.AddComponent<SphereCollider>().radius = 0.6f;
+                // 0.5 is the primitive's own radius, so the hit sphere matches
+                // the visible disc. A wider one swallows nearby drill holes,
+                // which deletes the neighbour instead of placing a marker.
+                ring.AddComponent<SphereCollider>().radius = 0.5f;
                 ring.AddComponent<MarkerRef>().MarkerId = m.Id;
                 ring.transform.SetParent(parent, false);
                 ring.transform.localPosition = m.LocalPosition + new Vector3(0f, 0f, SurfaceOffset * 2f);
