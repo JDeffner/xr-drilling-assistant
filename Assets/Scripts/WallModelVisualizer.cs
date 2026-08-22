@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -168,6 +169,16 @@ namespace DrillingAssistant
         private static Material _opaqueBase;
         private static Material _transparentBase;
 
+        // One tinted material per colour. The visuals are rebuilt on every model
+        // change and their materials are never released, so a fresh tint per
+        // visual piles up thousands of them over a session. The app uses a
+        // handful of colours, so the caches stay small.
+        private static readonly Dictionary<Color, Material> _opaqueByColor =
+            new Dictionary<Color, Material>();
+
+        private static readonly Dictionary<Color, Material> _transparentByColor =
+            new Dictionary<Color, Material>();
+
         /// <summary>
         /// Null-safe shader lookup: shaders resolved only via Shader.Find can be
         /// stripped from a player build. Falling back keeps a missing shader from
@@ -183,6 +194,10 @@ namespace DrillingAssistant
 
         public static Material GetOpaqueMaterial(Color color)
         {
+            // A cached material can be destroyed with the scene it was used in,
+            // so the null check is not redundant.
+            if (_opaqueByColor.TryGetValue(color, out var cached) && cached != null) return cached;
+
             if (_opaqueBase == null)
             {
                 _opaqueBase = new Material(UnlitShader());
@@ -192,11 +207,14 @@ namespace DrillingAssistant
             }
             var mat = new Material(_opaqueBase);
             mat.SetColor("_BaseColor", color);
+            _opaqueByColor[color] = mat;
             return mat;
         }
 
         private static Material GetTransparentMaterial(Color color)
         {
+            if (_transparentByColor.TryGetValue(color, out var cached) && cached != null) return cached;
+
             if (_transparentBase == null)
             {
                 _transparentBase = new Material(UnlitShader());
@@ -211,6 +229,7 @@ namespace DrillingAssistant
             }
             var mat = new Material(_transparentBase);
             mat.SetColor("_BaseColor", color);
+            _transparentByColor[color] = mat;
             return mat;
         }
     }
