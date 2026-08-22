@@ -10,12 +10,23 @@ namespace DrillingAssistant
     /// C5 save/load: one plan per wall, keyed by the wall anchor's UUID (which
     /// MRUK keeps stable across sessions, including snapshot-restored rooms).
     /// All plans live in one JSON file, so switching walls keeps every wall's
-    /// structures, reveals, markers and cables. The file is read once at
+    /// structures, reveals, markers and routes. The file is read once at
     /// startup; each save replaces only the current wall's entry.
+    ///
+    /// Writing is throttled: a change only marks the plan dirty, and the file is
+    /// written at most once per SaveInterval, plus whenever the app loses focus,
+    /// pauses or the component goes away. Chaining a route fires one change per
+    /// node, and a blocking file write per trigger press is a hitch on a headset.
     /// </summary>
     public class WallPlanStore : MonoBehaviour
     {
         public ScannedWallModel Model;
+
+        [Tooltip("Seconds between autosaves while the plan keeps changing.")]
+        public float SaveInterval = 1.5f;
+
+        private bool _dirty;
+        private float _nextSaveTime;
 
         [Serializable]
         private class PlanDto
@@ -23,7 +34,9 @@ namespace DrillingAssistant
             public string WallUuid;
             public List<ScannedStructure> Structures = new List<ScannedStructure>();
             public List<UserMarker> Markers = new List<UserMarker>();
-            public List<UserCable> Cables = new List<UserCable>();
+            // Field name kept as "Cables": it is the key in the saved JSON, so
+            // renaming it would drop the routes in plans saved before the rename.
+            public List<PlannedRoute> Cables = new List<PlannedRoute>();
         }
 
         [Serializable]
@@ -52,12 +65,42 @@ namespace DrillingAssistant
 
         private void OnEnable()
         {
-            if (Model != null) Model.Changed += Save;
+            if (Model != null) Model.Changed += MarkDirty;
         }
 
         private void OnDisable()
         {
-            if (Model != null) Model.Changed -= Save;
+            if (Model != null) Model.Changed -= MarkDirty;
+            Flush();
+        }
+
+        private void MarkDirty() => _dirty = true;
+
+        private void LateUpdate()
+        {
+            if (Time.unscaledTime < _nextSaveTime) return;
+            Flush();
+        }
+
+        private void OnApplicationPause(bool paused)
+        {
+            if (paused) Flush();
+        }
+
+        private void OnApplicationFocus(bool focused)
+        {
+            if (!focused) Flush();
+        }
+
+        /// <summary>
+        /// Writes a pending change. The dirty flag survives a save that had
+        /// nothing to write yet, so the change is not lost.
+        /// </summary>
+        private void Flush()
+        {
+            if (!_dirty || !Save()) return;
+            _dirty = false;
+            _nextSaveTime = Time.unscaledTime + SaveInterval;
         }
 
         /// <summary>
@@ -73,20 +116,21 @@ namespace DrillingAssistant
             Model.RestoreState(plan.Structures, plan.Markers, plan.Cables);
             Debug.Log($"[WallPlanStore] Restored plan for wall {uuid}: " +
                       $"{plan.Structures.Count} structures, {plan.Markers.Count} markers, " +
-                      $"{plan.Cables.Count} cables.");
+                      $"{plan.Cables.Count} routes.");
             return true;
         }
 
-        private void Save()
+        /// <summary>False when there is nothing worth writing yet.</summary>
+        private bool Save()
         {
-            if (Model == null || !Model.HasWall) return;
+            if (Model == null || !Model.HasWall) return false;
             // SetWall clears the model before restore/generation runs; that
             // transient empty state must not overwrite the wall's stored plan.
             // A populated wall always has structures, so only the gap is skipped.
-            if (Model.Structures.Count == 0) return;
+            if (Model.Structures.Count == 0) return false;
 
             var anchor = Model.WallAnchor.GetComponent<MRUKAnchor>();
-            if (anchor == null) return;
+            if (anchor == null) return false;
             string uuid = anchor.Anchor.Uuid.ToString();
 
             // Copied lists, not the model's own: the stored plan must survive
@@ -96,7 +140,7 @@ namespace DrillingAssistant
                 WallUuid = uuid,
                 Structures = new List<ScannedStructure>(Model.Structures),
                 Markers = new List<UserMarker>(Model.Markers),
-                Cables = new List<UserCable>(Model.Cables)
+                Cables = new List<PlannedRoute>(Model.Routes)
             };
             _file.Plans.RemoveAll(p => p.WallUuid == uuid);
             _file.Plans.Add(dto);
@@ -109,6 +153,7 @@ namespace DrillingAssistant
             {
                 Debug.LogWarning("[WallPlanStore] Save failed: " + e.Message);
             }
+            return true;
         }
     }
 }

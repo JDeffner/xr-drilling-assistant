@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -12,10 +13,10 @@ namespace DrillingAssistant
         public int MarkerId;
     }
 
-    /// <summary>Same as MarkerRef, for user-drawn cables.</summary>
-    public class CableRef : MonoBehaviour
+    /// <summary>Same as MarkerRef, for user-planned route legs.</summary>
+    public class RouteRef : MonoBehaviour
     {
-        public int CableId;
+        public int RouteId;
     }
 
     /// <summary>
@@ -26,9 +27,9 @@ namespace DrillingAssistant
     public static class WallModelVisualizer
     {
         private const float SurfaceOffset = 0.01f;
-        private const float CableThickness = 0.03f;
+        private const float RouteThickness = 0.03f;
 
-        public static readonly Color CableColor = new Color(0.1f, 0.85f, 0.9f);
+        public static readonly Color RouteColor = new Color(0.1f, 0.85f, 0.9f);
 
         public static void Clear(Transform parent)
         {
@@ -98,7 +99,7 @@ namespace DrillingAssistant
         /// <summary>
         /// A cube stretched between two wall-local points, lifted off the wall
         /// plane by zOffset. The caller decides material and whether the
-        /// collider stays (user cables keep it for click-removal).
+        /// collider stays (planned routes keep it for click-removal).
         /// </summary>
         private static GameObject BuildSegment(Transform parent, string name,
             Vector3 a, Vector3 b, float thickness, float zOffset)
@@ -121,49 +122,99 @@ namespace DrillingAssistant
 
         public static void BuildMarkers(Transform parent, ScannedWallModel model)
         {
-            foreach (var m in model.Markers)
-            {
-                var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
-                ring.name = $"Marker_{m.Id}";
-                Object.Destroy(ring.GetComponent<Collider>());
-                ring.AddComponent<SphereCollider>().radius = 0.6f;
-                ring.AddComponent<MarkerRef>().MarkerId = m.Id;
-                ring.transform.SetParent(parent, false);
-                ring.transform.localPosition = m.LocalPosition + new Vector3(0f, 0f, SurfaceOffset * 2f);
-                // Cylinder axis is Y; rotate so the disc lies flat on the wall.
-                ring.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
-                ring.transform.localScale = new Vector3(0.08f, 0.004f, 0.08f);
-                ring.GetComponent<MeshRenderer>().sharedMaterial =
-                    GetOpaqueMaterial(new Color(0.1f, 0.9f, 0.2f));
+            foreach (var m in model.Markers) BuildMarker(parent, m);
+        }
 
-                var label = new GameObject("Label");
-                label.transform.SetParent(parent, false);
-                label.transform.localPosition = m.LocalPosition + new Vector3(0f, 0.07f, SurfaceOffset * 3f);
-                label.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
-                label.transform.localScale = Vector3.one * 0.01f;
-                var text = label.AddComponent<TextMesh>();
-                text.text = $"M{m.Id}";
-                text.fontSize = 48;
-                text.color = new Color(0.1f, 0.9f, 0.2f);
-                text.anchor = TextAnchor.LowerCenter;
-                text.alignment = TextAlignment.Center;
+        /// <summary>
+        /// Disc plus label for one marker. Both carry a MarkerRef, so
+        /// DestroyMarker finds and removes the pair.
+        /// </summary>
+        public static void BuildMarker(Transform parent, UserMarker marker)
+        {
+            var ring = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+            ring.name = $"Marker_{marker.Id}";
+            Object.Destroy(ring.GetComponent<Collider>());
+            // 0.5 is the primitive's own radius, so the hit sphere matches
+            // the visible disc. A wider one swallows nearby drill holes,
+            // which deletes the neighbour instead of placing a marker.
+            ring.AddComponent<SphereCollider>().radius = 0.5f;
+            ring.AddComponent<MarkerRef>().MarkerId = marker.Id;
+            ring.transform.SetParent(parent, false);
+            ring.transform.localPosition = marker.LocalPosition + new Vector3(0f, 0f, SurfaceOffset * 2f);
+            // Cylinder axis is Y; rotate so the disc lies flat on the wall.
+            ring.transform.localRotation = Quaternion.Euler(90f, 0f, 0f);
+            ring.transform.localScale = new Vector3(0.08f, 0.004f, 0.08f);
+            ring.GetComponent<MeshRenderer>().sharedMaterial =
+                GetOpaqueMaterial(new Color(0.1f, 0.9f, 0.2f));
+
+            // Not a child of the disc: the disc is rotated and squashed flat,
+            // and the label must not inherit that.
+            var label = new GameObject($"Marker_{marker.Id}_Label");
+            label.AddComponent<MarkerRef>().MarkerId = marker.Id;
+            label.transform.SetParent(parent, false);
+            label.transform.localPosition = marker.LocalPosition + new Vector3(0f, 0.07f, SurfaceOffset * 3f);
+            label.transform.localRotation = Quaternion.Euler(0f, 180f, 0f);
+            label.transform.localScale = Vector3.one * 0.01f;
+            var text = label.AddComponent<TextMesh>();
+            text.text = $"M{marker.Id}";
+            text.fontSize = 48;
+            text.color = new Color(0.1f, 0.9f, 0.2f);
+            text.anchor = TextAnchor.LowerCenter;
+            text.alignment = TextAlignment.Center;
+        }
+
+        public static void DestroyMarker(Transform parent, int markerId)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
+            {
+                var child = parent.GetChild(i);
+                var reference = child.GetComponent<MarkerRef>();
+                if (reference != null && reference.MarkerId == markerId)
+                {
+                    Object.Destroy(child.gameObject);
+                }
             }
         }
 
-        public static void BuildCables(Transform parent, ScannedWallModel model)
+        public static void BuildRoutes(Transform parent, ScannedWallModel model)
         {
-            foreach (var c in model.Cables)
+            foreach (var r in model.Routes) BuildRoute(parent, r);
+        }
+
+        public static void BuildRoute(Transform parent, PlannedRoute route)
+        {
+            // The BoxCollider stays so the VR editor can hit it for removal.
+            var seg = BuildSegment(parent, $"Route_{route.Id}",
+                route.LocalStart, route.LocalEnd, RouteThickness, SurfaceOffset * 2f);
+            seg.AddComponent<RouteRef>().RouteId = route.Id;
+            seg.GetComponent<MeshRenderer>().sharedMaterial = GetOpaqueMaterial(RouteColor);
+        }
+
+        public static void DestroyRoute(Transform parent, int routeId)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
             {
-                // The BoxCollider stays so the VR editor can hit it for removal.
-                var seg = BuildSegment(parent, $"Cable_{c.Id}",
-                    c.LocalStart, c.LocalEnd, CableThickness, SurfaceOffset * 2f);
-                seg.AddComponent<CableRef>().CableId = c.Id;
-                seg.GetComponent<MeshRenderer>().sharedMaterial = GetOpaqueMaterial(CableColor);
+                var child = parent.GetChild(i);
+                var reference = child.GetComponent<RouteRef>();
+                if (reference != null && reference.RouteId == routeId)
+                {
+                    Object.Destroy(child.gameObject);
+                }
             }
         }
 
         private static Material _opaqueBase;
         private static Material _transparentBase;
+
+        // One tinted material per colour. The visuals are rebuilt on every model
+        // change and their materials are never released, so a fresh tint per
+        // visual piles up thousands of them over a session. The app uses a
+        // handful of colours, so the caches stay small.
+        private static readonly Dictionary<Color, Material> _opaqueByColor =
+            new Dictionary<Color, Material>();
+
+        private static readonly Dictionary<Color, Material> _transparentByColor =
+            new Dictionary<Color, Material>();
 
         /// <summary>
         /// Null-safe shader lookup: shaders resolved only via Shader.Find can be
@@ -180,6 +231,10 @@ namespace DrillingAssistant
 
         public static Material GetOpaqueMaterial(Color color)
         {
+            // A cached material can be destroyed with the scene it was used in,
+            // so the null check is not redundant.
+            if (_opaqueByColor.TryGetValue(color, out var cached) && cached != null) return cached;
+
             if (_opaqueBase == null)
             {
                 _opaqueBase = new Material(UnlitShader());
@@ -189,11 +244,14 @@ namespace DrillingAssistant
             }
             var mat = new Material(_opaqueBase);
             mat.SetColor("_BaseColor", color);
+            _opaqueByColor[color] = mat;
             return mat;
         }
 
         private static Material GetTransparentMaterial(Color color)
         {
+            if (_transparentByColor.TryGetValue(color, out var cached) && cached != null) return cached;
+
             if (_transparentBase == null)
             {
                 _transparentBase = new Material(UnlitShader());
@@ -208,6 +266,7 @@ namespace DrillingAssistant
             }
             var mat = new Material(_transparentBase);
             mat.SetColor("_BaseColor", color);
+            _transparentByColor[color] = mat;
             return mat;
         }
     }

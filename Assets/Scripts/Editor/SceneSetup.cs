@@ -117,8 +117,11 @@ namespace DrillingAssistant.EditorTools
             {
                 EditorUtility.SetDirty(obj);
             }
-            EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
-            EditorSceneManager.SaveOpenScenes();
+            var activeScene = SceneManager.GetActiveScene();
+            EditorSceneManager.MarkSceneDirty(activeScene);
+            // Only the active scene was touched, so only it is saved; other
+            // additively loaded scenes keep their unsaved edits.
+            EditorSceneManager.SaveScene(activeScene);
             Debug.Log("[SceneSetup] Drilling Assistant scene setup complete.");
         }
 

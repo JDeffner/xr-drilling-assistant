@@ -6,9 +6,8 @@ namespace DrillingAssistant
 {
     /// <summary>
     /// SelectWall state: point the left controller ray at an MRUK wall and
-    /// confirm with the trigger. MRUK itself handles loading scene data from
-    /// the device (requesting Space Setup if none exists) or falling back to a
-    /// mock room in the editor; this component only does the picking.
+    /// confirm with the trigger. MrukBootstrap owns loading the scene data;
+    /// this component only does the picking.
     /// </summary>
     public class WallSelector : MonoBehaviour
     {
@@ -32,6 +31,9 @@ namespace DrillingAssistant
 
             _highlight = GameObject.CreatePrimitive(PrimitiveType.Quad);
             _highlight.name = "WallHighlight";
+            // Parented so the quad dies with its owner instead of staying
+            // behind at the scene root.
+            _highlight.transform.SetParent(transform, false);
             Destroy(_highlight.GetComponent<Collider>());
             _highlight.GetComponent<MeshRenderer>().sharedMaterial =
                 WallModelVisualizer.GetOpaqueMaterial(new Color(0.3f, 0.8f, 1f, 1f));
