@@ -26,7 +26,7 @@ Five core components make up the demonstrator:
 | # | Component | In the app |
 |---|-----------|-----------|
 | 1 | Detecting hidden structures with the device | The left controller acts as the stud finder. Sweeping it near the real wall reveals hidden cables and studs with a haptic pulse. |
-| 2 | A shared digital model of the wall | An editable, wall-local data model ([ScannedWallModel.cs](Assets/Scripts/ScannedWallModel.cs)) is the single source of truth for both realities. |
+| 2 | A shared digital model of the wall | An editable, wall-local data model ([ScannedWallModel.cs](Assets/Scripts/Core/ScannedWallModel.cs)) is the single source of truth for both realities. |
 | 3 | Planning on the wall | In VR the wall appears as a manipulable copy: place drill markers, chain planned routes across multiple points, erase, move, rotate and scale. |
 | 4 | Bringing the plan back to reality | The AR overlay re-projects all findings and planned markers onto the physical wall at their true positions, regardless of how the VR copy was moved or scaled. |
 | 5 | Persistence | Plans autosave per wall (keyed by the wall anchor's UUID) and are restored when the same wall is selected in a later session. |
@@ -100,8 +100,8 @@ Standard Android/Quest build (IL2CPP). The APK falls back to the bundled room sn
 
 ## License
 
-[MIT](LICENSE), covering the application code in `Assets/Scripts` and the
-project configuration in this repository.
+[MIT](LICENSE), covering the application code in `Assets/Scripts`, the tests
+in `Assets/Tests` and the project configuration in this repository.
 
 The Meta XR Core SDK and the Mixed Reality Utility Kit are not vendored here.
 They are pulled as Unity packages via `Packages/manifest.json` and remain under
@@ -116,12 +116,15 @@ Assets/
     AppStateManager.cs       State machine: SelectWall -> ScanAR <-> PlanVR
     WallSelector.cs          Wall picking via controller ray (MRUK anchors)
     StructureRevealer.cs     Stud-finder logic + haptics (AR)
-    ScannedWallModel.cs      Wall-local data model, single source of truth
     VRWallEditor.cs          Grabbable wall copy + marker/route editing (VR)
     OverlayProjector.cs      Re-projection onto the real wall (AR)
     WallPlanStore.cs         Per-wall autosave/restore (JSON, keyed by anchor UUID)
     TransitionController.cs  Cut + fade transition between AR and VR
     WallModelVisualizer.cs   Shared visual builder for overlay and VR copy
-    StructureCatalog.cs      Type -> color/size mapping
+    Core/                    Device-free assembly (DrillingAssistant.Core)
+      ScannedWallModel.cs    Wall-local data model, single source of truth
+      PlanGeometry.cs        Plan maths: route legs and probe distances
+      StructureCatalog.cs    Type -> color/size mapping
     Editor/                  SceneSetup and RoomSnapshotSaver tools
+  Tests/EditMode/            Edit-mode tests over Core, no headset needed
 ```
