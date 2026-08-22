@@ -10,7 +10,7 @@ namespace DrillingAssistant
     /// C5 save/load: one plan per wall, keyed by the wall anchor's UUID (which
     /// MRUK keeps stable across sessions, including snapshot-restored rooms).
     /// All plans live in one JSON file, so switching walls keeps every wall's
-    /// structures, reveals, markers and cables. The file is read once at
+    /// structures, reveals, markers and routes. The file is read once at
     /// startup; each save replaces only the current wall's entry.
     /// </summary>
     public class WallPlanStore : MonoBehaviour
@@ -23,7 +23,9 @@ namespace DrillingAssistant
             public string WallUuid;
             public List<ScannedStructure> Structures = new List<ScannedStructure>();
             public List<UserMarker> Markers = new List<UserMarker>();
-            public List<UserCable> Cables = new List<UserCable>();
+            // Field name kept as "Cables": it is the key in the saved JSON, so
+            // renaming it would drop the routes in plans saved before the rename.
+            public List<PlannedRoute> Cables = new List<PlannedRoute>();
         }
 
         [Serializable]
@@ -73,7 +75,7 @@ namespace DrillingAssistant
             Model.RestoreState(plan.Structures, plan.Markers, plan.Cables);
             Debug.Log($"[WallPlanStore] Restored plan for wall {uuid}: " +
                       $"{plan.Structures.Count} structures, {plan.Markers.Count} markers, " +
-                      $"{plan.Cables.Count} cables.");
+                      $"{plan.Cables.Count} routes.");
             return true;
         }
 
@@ -96,7 +98,7 @@ namespace DrillingAssistant
                 WallUuid = uuid,
                 Structures = new List<ScannedStructure>(Model.Structures),
                 Markers = new List<UserMarker>(Model.Markers),
-                Cables = new List<UserCable>(Model.Cables)
+                Cables = new List<PlannedRoute>(Model.Routes)
             };
             _file.Plans.RemoveAll(p => p.WallUuid == uuid);
             _file.Plans.Add(dto);

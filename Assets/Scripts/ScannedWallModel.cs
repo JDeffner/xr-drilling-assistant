@@ -40,10 +40,12 @@ namespace DrillingAssistant
     }
 
     /// <summary>
-    /// A planned cable run the user drew in VR between two free wall-local points.
+    /// One leg of a route the user planned in VR, between two free wall-local
+    /// points. Distinct from StructureType.CableRun, which is an existing
+    /// cable hidden in the wall.
     /// </summary>
     [Serializable]
-    public class UserCable
+    public class PlannedRoute
     {
         public int Id;
         public Vector3 LocalStart;
@@ -63,7 +65,7 @@ namespace DrillingAssistant
 
         public readonly List<ScannedStructure> Structures = new List<ScannedStructure>();
         public readonly List<UserMarker> Markers = new List<UserMarker>();
-        public readonly List<UserCable> Cables = new List<UserCable>();
+        public readonly List<PlannedRoute> Routes = new List<PlannedRoute>();
 
         /// <summary>Raised whenever wall, structures or markers change.</summary>
         public event Action Changed;
@@ -71,7 +73,7 @@ namespace DrillingAssistant
         public bool HasWall => WallAnchor != null;
 
         private int _nextMarkerId = 1;
-        private int _nextCableId = 1;
+        private int _nextRouteId = 1;
 
         public void SetWall(Transform anchor, Vector2 size)
         {
@@ -79,7 +81,7 @@ namespace DrillingAssistant
             WallSize = size;
             Structures.Clear();
             Markers.Clear();
-            Cables.Clear();
+            Routes.Clear();
             RaiseChanged();
         }
 
@@ -121,33 +123,33 @@ namespace DrillingAssistant
             if (removed > 0) RaiseChanged();
         }
 
-        public UserCable AddCable(Vector3 localStart, Vector3 localEnd)
+        public PlannedRoute AddRoute(Vector3 localStart, Vector3 localEnd)
         {
-            var cable = new UserCable { Id = _nextCableId++, LocalStart = localStart, LocalEnd = localEnd };
-            Cables.Add(cable);
+            var route = new PlannedRoute { Id = _nextRouteId++, LocalStart = localStart, LocalEnd = localEnd };
+            Routes.Add(route);
             RaiseChanged();
-            return cable;
+            return route;
         }
 
-        public void RemoveCable(int id)
+        public void RemoveRoute(int id)
         {
-            int removed = Cables.RemoveAll(c => c.Id == id);
+            int removed = Routes.RemoveAll(r => r.Id == id);
             if (removed > 0) RaiseChanged();
         }
 
         /// <summary>C5 restore: replace all content in one step (single Changed event).</summary>
-        public void RestoreState(List<ScannedStructure> structures, List<UserMarker> markers, List<UserCable> cables)
+        public void RestoreState(List<ScannedStructure> structures, List<UserMarker> markers, List<PlannedRoute> routes)
         {
             Structures.Clear();
             Structures.AddRange(structures);
             Markers.Clear();
             Markers.AddRange(markers);
-            Cables.Clear();
-            Cables.AddRange(cables);
+            Routes.Clear();
+            Routes.AddRange(routes);
             _nextMarkerId = 1;
             foreach (var m in Markers) _nextMarkerId = Mathf.Max(_nextMarkerId, m.Id + 1);
-            _nextCableId = 1;
-            foreach (var c in Cables) _nextCableId = Mathf.Max(_nextCableId, c.Id + 1);
+            _nextRouteId = 1;
+            foreach (var r in Routes) _nextRouteId = Mathf.Max(_nextRouteId, r.Id + 1);
             RaiseChanged();
         }
 

@@ -1,6 +1,6 @@
 # Cross-Reality Drilling Assistant
 
-A Meta Quest 3 demonstrator that turns the classic "where can I safely drill into this wall?" problem into a cross-reality workflow: scan a real wall for hidden structures in AR, then switch into VR to plan drill holes and cable runs on a grabbable digital copy of that same wall, and finally project the plan back onto the physical wall as an AR overlay.
+A Meta Quest 3 demonstrator that turns the classic "where can I safely drill into this wall?" problem into a cross-reality workflow: scan a real wall for hidden structures in AR, then switch into VR to plan drill holes and cable routes on a grabbable digital copy of that same wall, and finally project the plan back onto the physical wall as an AR overlay.
 
 Built with Unity 6000.4.2f1, the Meta XR Core SDK and the Mixed Reality Utility Kit (MRUK).
 
@@ -27,7 +27,7 @@ Five core components make up the demonstrator:
 |---|-----------|-----------|
 | 1 | Detecting hidden structures with the device | The left controller acts as the stud finder. Sweeping it near the real wall reveals hidden cables and studs with a haptic pulse. |
 | 2 | A shared digital model of the wall | An editable, wall-local data model ([ScannedWallModel.cs](Assets/Scripts/ScannedWallModel.cs)) is the single source of truth for both realities. |
-| 3 | Planning on the wall | In VR the wall appears as a manipulable copy: place drill markers, chain cable/pipe runs across multiple points, erase, move, rotate and scale. |
+| 3 | Planning on the wall | In VR the wall appears as a manipulable copy: place drill markers, chain planned routes across multiple points, erase, move, rotate and scale. |
 | 4 | Bringing the plan back to reality | The AR overlay re-projects all findings and planned markers onto the physical wall at their true positions, regardless of how the VR copy was moved or scaled. |
 | 5 | Persistence | Plans autosave per wall (keyed by the wall anchor's UUID) and are restored when the same wall is selected in a later session. |
 
@@ -53,19 +53,19 @@ stateDiagram-v2
 | Input | SelectWall | ScanAR | PlanVR |
 |-------|-----------|--------|--------|
 | Left controller | Aim ray at wall | Sweep as stud finder | Grip: grab wall copy |
-| Left trigger | Confirm wall | | Drop a cable node (chain runs point by point) |
+| Left trigger | Confirm wall | | Drop a route node (chain a route point by point) |
 | Right trigger | | | Place drill marker / delete marker under ray |
 | Both grips | | | Scale the wall copy |
-| A | | | Erase marker or cable segment under ray |
+| A | | | Erase marker or route leg under ray |
 | B | | Switch to VR | Switch back to AR |
-| X | | | End the current cable run |
+| X | | | End the current route |
 | Y | | Back to wall selection | |
 
 ## Implementation notes
 
 A few decisions worth calling out:
 
-- **Wall-local coordinates everywhere.** All structures, markers and cables are stored in the wall anchor's coordinate frame. The VR editor only ever transforms the root of the display copy, never the data, so re-projecting onto the real wall is a pure instantiation at identity and stays truthful no matter what happened in VR.
+- **Wall-local coordinates everywhere.** All structures, markers and routes are stored in the wall anchor's coordinate frame. The VR editor only ever transforms the root of the display copy, never the data, so re-projecting onto the real wall is a pure instantiation at identity and stays truthful no matter what happened in VR.
 - **Robust room loading on device.** MRUK's auto-load can fire before the Android scene permission is granted and then never retry. [MrukBootstrap.cs](Assets/Scripts/MrukBootstrap.cs) waits for the permission, retries explicitly, and as a last resort loads a room snapshot captured over Quest Link ([RoomSnapshotSaver.cs](Assets/Scripts/Editor/RoomSnapshotSaver.cs)). MRUK's own JSON serialization preserves anchor UUIDs, so saved plans still match after the fallback.
 - **Reproducible scene wiring.** `Tools > Drilling Assistant > Setup Scene` ([SceneSetup.cs](Assets/Scripts/Editor/SceneSetup.cs)) builds and wires the whole scene idempotently instead of relying on manual inspector setup.
 - **Autosave, no save button.** Every model change triggers a save of the current wall's entry in a single JSON file; switching walls keeps every wall's plan.
@@ -117,7 +117,7 @@ Assets/
     WallSelector.cs          Wall picking via controller ray (MRUK anchors)
     StructureRevealer.cs     Stud-finder logic + haptics (AR)
     ScannedWallModel.cs      Wall-local data model, single source of truth
-    VRWallEditor.cs          Grabbable wall copy + marker/cable editing (VR)
+    VRWallEditor.cs          Grabbable wall copy + marker/route editing (VR)
     OverlayProjector.cs      Re-projection onto the real wall (AR)
     WallPlanStore.cs         Per-wall autosave/restore (JSON, keyed by anchor UUID)
     TransitionController.cs  Cut + fade transition between AR and VR

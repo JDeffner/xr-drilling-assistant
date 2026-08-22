@@ -6,7 +6,7 @@ namespace DrillingAssistant
     /// C4: projects the model back onto the real wall as an AR overlay. Always
     /// instantiates from the wall-local data at identity under the wall anchor,
     /// so whatever was rotated/scaled in VR stays truthful to the physical wall.
-    /// Only revealed structures are shown; user markers and cables are always shown.
+    /// Only revealed structures are shown; user markers and routes are always shown.
     /// </summary>
     public class OverlayProjector : MonoBehaviour
     {
@@ -45,7 +45,7 @@ namespace DrillingAssistant
             WallModelVisualizer.Clear(_root);
             WallModelVisualizer.BuildStructures(_root, Model, revealedOnly: true);
             WallModelVisualizer.BuildMarkers(_root, Model);
-            WallModelVisualizer.BuildCables(_root, Model);
+            WallModelVisualizer.BuildRoutes(_root, Model);
         }
     }
 }

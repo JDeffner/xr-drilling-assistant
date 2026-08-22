@@ -6,10 +6,10 @@ namespace DrillingAssistant
     /// C3: in VR the scanned wall model appears as a manipulable copy.
     /// Grip on one controller moves/rotates it, both grips scale it. You aim
     /// with the right controller ray. Right trigger places a drill marker on
-    /// empty wall or deletes the marker it points at. Left trigger lays a pipe:
-    /// each press drops a node and draws a segment from the previous one, so a
-    /// run can be chained across many points; X ends the run. A erases the
-    /// marker or pipe segment under the ray. Manipulation only ever changes this
+    /// empty wall or deletes the marker it points at. Left trigger lays a
+    /// planned route: each press drops a node and draws a leg from the previous
+    /// one, so a route can be chained across many points; X ends the route. A
+    /// erases the marker or route leg under the ray. Manipulation only ever changes this
     /// copy's root transform; the wall-local data is never touched, so C4 stays
     /// truthful.
     /// </summary>
@@ -21,10 +21,10 @@ namespace DrillingAssistant
 
         private Transform _root;
         private LineRenderer _ray;
-        private LineRenderer _cablePreview;
+        private LineRenderer _routePreview;
 
-        // wall-local start point of a cable being drawn, null when none started
-        private Vector3? _pendingCableStart;
+        // wall-local start point of the route being drawn, null when none started
+        private Vector3? _pendingRouteStart;
 
         // one-hand grab state
         private Transform _grabHand;
@@ -49,8 +49,8 @@ namespace DrillingAssistant
             if (Model != null) Model.Changed -= RebuildContents;
             _grabHand = null;
             _twoHanded = false;
-            _pendingCableStart = null;
-            if (_cablePreview != null) _cablePreview.enabled = false;
+            _pendingRouteStart = null;
+            if (_routePreview != null) _routePreview.enabled = false;
         }
 
         private void EnsureRoot()
@@ -74,11 +74,11 @@ namespace DrillingAssistant
 
             _ray = WallSelector.CreateRayLine(gameObject, new Color(1f, 0.9f, 0.3f));
 
-            // Preview of the cable being drawn; needs its own GameObject since
+            // Preview of the route being drawn; needs its own GameObject since
             // a GameObject can hold only one LineRenderer.
-            var previewGo = new GameObject("CablePreview");
+            var previewGo = new GameObject("RoutePreview");
             previewGo.transform.SetParent(transform, false);
-            _cablePreview = WallSelector.CreateRayLine(previewGo, WallModelVisualizer.CableColor);
+            _routePreview = WallSelector.CreateRayLine(previewGo, WallModelVisualizer.RouteColor);
 
             // Minimal VR environment: a dark floor disc so the void has a ground.
             var floor = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
@@ -99,7 +99,7 @@ namespace DrillingAssistant
             // Show everything registered: revealed solid, unrevealed as ghosts.
             WallModelVisualizer.BuildStructures(_root, Model, revealedOnly: false);
             WallModelVisualizer.BuildMarkers(_root, Model);
-            WallModelVisualizer.BuildCables(_root, Model);
+            WallModelVisualizer.BuildRoutes(_root, Model);
         }
 
         private void Update()
@@ -151,7 +151,7 @@ namespace DrillingAssistant
             if (RightAnchor == null || !OVRInput.IsControllerConnected(OVRInput.Controller.RTouch))
             {
                 _ray.enabled = false;
-                _cablePreview.enabled = false;
+                _routePreview.enabled = false;
                 return;
             }
 
@@ -162,18 +162,18 @@ namespace DrillingAssistant
             _ray.SetPosition(0, ray.origin);
             _ray.SetPosition(1, hasHit ? hit.point : ray.origin + ray.direction * 3f);
 
-            UpdateCablePreview(hasHit, hit);
+            UpdateRoutePreview(hasHit, hit);
 
-            // X ends the current pipe run (works even while pointing at nothing).
+            // X ends the current route (works even while pointing at nothing).
             if (OVRInput.GetDown(OVRInput.RawButton.X))
             {
-                _pendingCableStart = null;
+                _pendingRouteStart = null;
                 return;
             }
 
             if (!hasHit) return;
 
-            // A erases the marker or pipe segment under the ray.
+            // A erases the marker or route leg under the ray.
             if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
             {
                 RemoveAtHit(hit);
@@ -189,18 +189,18 @@ namespace DrillingAssistant
             }
             else if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch))
             {
-                // Left trigger: drop the next pipe node.
-                AddPipeNode(hit);
+                // Left trigger: drop the next route node.
+                AddRouteNode(hit);
             }
         }
 
-        private void UpdateCablePreview(bool hasHit, RaycastHit hit)
+        private void UpdateRoutePreview(bool hasHit, RaycastHit hit)
         {
-            bool show = _pendingCableStart.HasValue && hasHit;
-            _cablePreview.enabled = show;
+            bool show = _pendingRouteStart.HasValue && hasHit;
+            _routePreview.enabled = show;
             if (!show) return;
-            _cablePreview.SetPosition(0, _root.TransformPoint(_pendingCableStart.Value));
-            _cablePreview.SetPosition(1, hit.point);
+            _routePreview.SetPosition(0, _root.TransformPoint(_pendingRouteStart.Value));
+            _routePreview.SetPosition(1, hit.point);
         }
 
         private bool RaycastModel(Ray ray, out RaycastHit result)
@@ -227,21 +227,21 @@ namespace DrillingAssistant
             Model.AddMarker(local);
         }
 
-        private void AddPipeNode(RaycastHit hit)
+        private void AddRouteNode(RaycastHit hit)
         {
-            // Pipe nodes are free points on the wall plane, independent of markers.
-            // First press starts a run; each later press commits a segment from
-            // the previous node and becomes the start of the next. X ends the run.
+            // Route nodes are free points on the wall plane, independent of
+            // markers. First press starts a route; each later press commits a leg
+            // from the previous node and becomes the start of the next. X ends it.
             Vector3 local = _root.InverseTransformPoint(hit.point);
             local.z = 0f;
 
-            if (_pendingCableStart.HasValue &&
-                (local - _pendingCableStart.Value).sqrMagnitude > 0.0004f)
+            // A zero-length leg (double press on the same spot) is ignored.
+            if (_pendingRouteStart.HasValue &&
+                (local - _pendingRouteStart.Value).sqrMagnitude > 0.0004f)
             {
-                // Ignore a zero-length segment (double press on the same spot).
-                Model.AddCable(_pendingCableStart.Value, local);
+                Model.AddRoute(_pendingRouteStart.Value, local);
             }
-            _pendingCableStart = local;
+            _pendingRouteStart = local;
         }
 
         private void RemoveAtHit(RaycastHit hit)
@@ -252,8 +252,8 @@ namespace DrillingAssistant
                 Model.RemoveMarker(markerRef.MarkerId);
                 return;
             }
-            var cableRef = hit.collider.GetComponentInParent<CableRef>();
-            if (cableRef != null) Model.RemoveCable(cableRef.CableId);
+            var routeRef = hit.collider.GetComponentInParent<RouteRef>();
+            if (routeRef != null) Model.RemoveRoute(routeRef.RouteId);
         }
 
     }

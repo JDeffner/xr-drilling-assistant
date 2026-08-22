@@ -12,10 +12,10 @@ namespace DrillingAssistant
         public int MarkerId;
     }
 
-    /// <summary>Same as MarkerRef, for user-drawn cables.</summary>
-    public class CableRef : MonoBehaviour
+    /// <summary>Same as MarkerRef, for user-planned route legs.</summary>
+    public class RouteRef : MonoBehaviour
     {
-        public int CableId;
+        public int RouteId;
     }
 
     /// <summary>
@@ -26,9 +26,9 @@ namespace DrillingAssistant
     public static class WallModelVisualizer
     {
         private const float SurfaceOffset = 0.01f;
-        private const float CableThickness = 0.03f;
+        private const float RouteThickness = 0.03f;
 
-        public static readonly Color CableColor = new Color(0.1f, 0.85f, 0.9f);
+        public static readonly Color RouteColor = new Color(0.1f, 0.85f, 0.9f);
 
         public static void Clear(Transform parent)
         {
@@ -98,7 +98,7 @@ namespace DrillingAssistant
         /// <summary>
         /// A cube stretched between two wall-local points, lifted off the wall
         /// plane by zOffset. The caller decides material and whether the
-        /// collider stays (user cables keep it for click-removal).
+        /// collider stays (planned routes keep it for click-removal).
         /// </summary>
         private static GameObject BuildSegment(Transform parent, string name,
             Vector3 a, Vector3 b, float thickness, float zOffset)
@@ -153,15 +153,15 @@ namespace DrillingAssistant
             }
         }
 
-        public static void BuildCables(Transform parent, ScannedWallModel model)
+        public static void BuildRoutes(Transform parent, ScannedWallModel model)
         {
-            foreach (var c in model.Cables)
+            foreach (var r in model.Routes)
             {
                 // The BoxCollider stays so the VR editor can hit it for removal.
-                var seg = BuildSegment(parent, $"Cable_{c.Id}",
-                    c.LocalStart, c.LocalEnd, CableThickness, SurfaceOffset * 2f);
-                seg.AddComponent<CableRef>().CableId = c.Id;
-                seg.GetComponent<MeshRenderer>().sharedMaterial = GetOpaqueMaterial(CableColor);
+                var seg = BuildSegment(parent, $"Route_{r.Id}",
+                    r.LocalStart, r.LocalEnd, RouteThickness, SurfaceOffset * 2f);
+                seg.AddComponent<RouteRef>().RouteId = r.Id;
+                seg.GetComponent<MeshRenderer>().sharedMaterial = GetOpaqueMaterial(RouteColor);
             }
         }
 
