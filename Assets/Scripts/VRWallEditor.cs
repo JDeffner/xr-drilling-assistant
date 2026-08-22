@@ -31,6 +31,11 @@ namespace DrillingAssistant
         private Vector3 _grabPosOffset;
         private Quaternion _grabRotOffset;
 
+        // Reused so the per-frame raycast does not allocate a hit array. The
+        // ray crosses the wall quad plus a handful of markers and route legs,
+        // so this is far more than it ever needs.
+        private readonly RaycastHit[] _hits = new RaycastHit[32];
+
         // two-hand scale state
         private bool _twoHanded;
         private float _startHandDistance;
@@ -249,8 +254,10 @@ namespace DrillingAssistant
         {
             result = default;
             float best = float.MaxValue;
-            foreach (var hit in Physics.RaycastAll(ray, 10f))
+            int count = Physics.RaycastNonAlloc(ray, _hits, 10f);
+            for (int i = 0; i < count; i++)
             {
+                var hit = _hits[i];
                 if (!hit.transform.IsChildOf(_root)) continue;
                 if (hit.distance < best)
                 {
