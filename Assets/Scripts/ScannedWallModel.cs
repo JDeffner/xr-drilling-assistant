@@ -6,9 +6,10 @@ namespace DrillingAssistant
 {
     public enum StructureType
     {
-        CableRun,
-        Pipe,
-        Stud
+        CableRun = 0,
+        // 1 was Pipe, which nothing ever generated. The values are explicit so
+        // saved plans written before it was removed still read back correctly.
+        Stud = 2
     }
 
     /// <summary>

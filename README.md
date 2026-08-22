@@ -122,6 +122,6 @@ Assets/
     WallPlanStore.cs         Per-wall autosave/restore (JSON, keyed by anchor UUID)
     TransitionController.cs  Cut + fade transition between AR and VR
     WallModelVisualizer.cs   Shared visual builder for overlay and VR copy
-    StructureCatalog.cs      Type -> color/size/label mapping
+    StructureCatalog.cs      Type -> color/size mapping
     Editor/                  SceneSetup and RoomSnapshotSaver tools
 ```
