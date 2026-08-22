@@ -28,7 +28,7 @@
       "url": "https://packages.unity.com"
     },
     "com.meta.xr.unity-mcp.extension": {
-      "version": "https://github.com/meta-quest/Unity-MCP-Extensions.git",
+      "version": "https://github.com/meta-quest/Unity-MCP-Extensions.git#ac3dd9cdb2675cb0eee98655acb0731349fc6f9e",
       "depth": 0,
       "source": "git",
       "dependencies": {
