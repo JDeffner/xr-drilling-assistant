@@ -5,7 +5,7 @@ A Meta Quest 3 demonstrator that turns the classic "where can I safely drill int
 Built with Unity 6000.4.2f1, the Meta XR Core SDK and the Mixed Reality Utility Kit (MRUK).
 
 > [!NOTE]
-> This project is the final assignment of the *Virtual Reality and 3D Interaction* lecture (Human-Computer Interaction group, Trier University, summer term 2026). The full task sheet is included as [VR_Exercise_04.pdf](VR_Exercise_04.pdf).
+> This project is the final assignment of the *Virtual Reality and 3D Interaction* lecture (Human-Computer Interaction group, Trier University, summer term 2026).
 
 ## The assignment
 
