@@ -286,7 +286,7 @@ namespace DrillingAssistant
 
             // A zero-length leg (double press on the same spot) is ignored.
             if (_pendingRouteStart.HasValue &&
-                (local - _pendingRouteStart.Value).sqrMagnitude > 0.0004f)
+                PlanGeometry.IsRouteLegLongEnough(_pendingRouteStart.Value, local))
             {
                 Model.AddRoute(_pendingRouteStart.Value, local);
             }
