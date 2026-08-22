@@ -67,8 +67,21 @@ namespace DrillingAssistant
         public readonly List<UserMarker> Markers = new List<UserMarker>();
         public readonly List<PlannedRoute> Routes = new List<PlannedRoute>();
 
-        /// <summary>Raised whenever wall, structures or markers change.</summary>
+        /// <summary>Raised on every change, coarse enough for persistence.</summary>
         public event Action Changed;
+
+        /// <summary>
+        /// Raised when the content changed as a whole and visuals have to be
+        /// built from scratch: a new wall, a restored plan, a new or revealed
+        /// structure. Markers and routes report themselves one by one below, so
+        /// a visual can add or remove a single object instead of rebuilding.
+        /// </summary>
+        public event Action Rebuilt;
+
+        public event Action<UserMarker> MarkerAdded;
+        public event Action<int> MarkerRemoved;
+        public event Action<PlannedRoute> RouteAdded;
+        public event Action<int> RouteRemoved;
 
         public bool HasWall => WallAnchor != null;
 
@@ -82,7 +95,7 @@ namespace DrillingAssistant
             Structures.Clear();
             Markers.Clear();
             Routes.Clear();
-            RaiseChanged();
+            RaiseRebuilt();
         }
 
         public void AddStructure(int markerId, StructureType type, Vector3 localPosition,
@@ -96,7 +109,7 @@ namespace DrillingAssistant
                 Path = path ?? new List<Vector3>(),
                 Revealed = false
             });
-            RaiseChanged();
+            RaiseRebuilt();
         }
 
         /// <summary>Returns true if the structure was newly revealed.</summary>
@@ -105,7 +118,7 @@ namespace DrillingAssistant
             var s = Structures.Find(x => x.MarkerId == markerId);
             if (s == null || s.Revealed) return false;
             s.Revealed = true;
-            RaiseChanged();
+            RaiseRebuilt();
             return true;
         }
 
@@ -113,6 +126,7 @@ namespace DrillingAssistant
         {
             var marker = new UserMarker { Id = _nextMarkerId++, LocalPosition = localPosition };
             Markers.Add(marker);
+            MarkerAdded?.Invoke(marker);
             RaiseChanged();
             return marker;
         }
@@ -120,13 +134,16 @@ namespace DrillingAssistant
         public void RemoveMarker(int id)
         {
             int removed = Markers.RemoveAll(m => m.Id == id);
-            if (removed > 0) RaiseChanged();
+            if (removed == 0) return;
+            MarkerRemoved?.Invoke(id);
+            RaiseChanged();
         }
 
         public PlannedRoute AddRoute(Vector3 localStart, Vector3 localEnd)
         {
             var route = new PlannedRoute { Id = _nextRouteId++, LocalStart = localStart, LocalEnd = localEnd };
             Routes.Add(route);
+            RouteAdded?.Invoke(route);
             RaiseChanged();
             return route;
         }
@@ -134,7 +151,9 @@ namespace DrillingAssistant
         public void RemoveRoute(int id)
         {
             int removed = Routes.RemoveAll(r => r.Id == id);
-            if (removed > 0) RaiseChanged();
+            if (removed == 0) return;
+            RouteRemoved?.Invoke(id);
+            RaiseChanged();
         }
 
         /// <summary>C5 restore: replace all content in one step (single Changed event).</summary>
@@ -150,7 +169,7 @@ namespace DrillingAssistant
             foreach (var m in Markers) _nextMarkerId = Mathf.Max(_nextMarkerId, m.Id + 1);
             _nextRouteId = 1;
             foreach (var r in Routes) _nextRouteId = Mathf.Max(_nextRouteId, r.Id + 1);
-            RaiseChanged();
+            RaiseRebuilt();
         }
 
         public Vector3 WallToWorld(Vector3 localPosition) => WallAnchor.TransformPoint(localPosition);
@@ -158,5 +177,11 @@ namespace DrillingAssistant
         public Vector3 WorldToWall(Vector3 worldPosition) => WallAnchor.InverseTransformPoint(worldPosition);
 
         private void RaiseChanged() => Changed?.Invoke();
+
+        private void RaiseRebuilt()
+        {
+            Rebuilt?.Invoke();
+            Changed?.Invoke();
+        }
     }
 }

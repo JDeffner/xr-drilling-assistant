@@ -41,16 +41,58 @@ namespace DrillingAssistant
             if (Model == null || !Model.HasWall) return;
             EnsureRoot();
             RebuildContents();
-            Model.Changed += RebuildContents;
+            Subscribe(true);
         }
 
         private void OnDisable()
         {
-            if (Model != null) Model.Changed -= RebuildContents;
+            if (Model != null) Subscribe(false);
             _grabHand = null;
             _twoHanded = false;
             _pendingRouteStart = null;
             if (_routePreview != null) _routePreview.enabled = false;
+        }
+
+        /// <summary>
+        /// A whole-content change rebuilds everything; a single marker or route
+        /// only adds or destroys its own objects.
+        /// </summary>
+        private void Subscribe(bool on)
+        {
+            if (on)
+            {
+                Model.Rebuilt += RebuildContents;
+                Model.MarkerAdded += OnMarkerAdded;
+                Model.MarkerRemoved += OnMarkerRemoved;
+                Model.RouteAdded += OnRouteAdded;
+                Model.RouteRemoved += OnRouteRemoved;
+                return;
+            }
+            Model.Rebuilt -= RebuildContents;
+            Model.MarkerAdded -= OnMarkerAdded;
+            Model.MarkerRemoved -= OnMarkerRemoved;
+            Model.RouteAdded -= OnRouteAdded;
+            Model.RouteRemoved -= OnRouteRemoved;
+        }
+
+        private void OnMarkerAdded(UserMarker marker)
+        {
+            if (_root != null) WallModelVisualizer.BuildMarker(_root, marker);
+        }
+
+        private void OnMarkerRemoved(int markerId)
+        {
+            if (_root != null) WallModelVisualizer.DestroyMarker(_root, markerId);
+        }
+
+        private void OnRouteAdded(PlannedRoute route)
+        {
+            if (_root != null) WallModelVisualizer.BuildRoute(_root, route);
+        }
+
+        private void OnRouteRemoved(int routeId)
+        {
+            if (_root != null) WallModelVisualizer.DestroyRoute(_root, routeId);
         }
 
         private void EnsureRoot()

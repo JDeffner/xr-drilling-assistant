@@ -17,14 +17,50 @@ namespace DrillingAssistant
         private void OnEnable()
         {
             if (Model == null) return;
-            Model.Changed += Rebuild;
+            Model.Rebuilt += Rebuild;
+            Model.MarkerAdded += OnMarkerAdded;
+            Model.MarkerRemoved += OnMarkerRemoved;
+            Model.RouteAdded += OnRouteAdded;
+            Model.RouteRemoved += OnRouteRemoved;
             Rebuild();
         }
 
         private void OnDisable()
         {
-            if (Model != null) Model.Changed -= Rebuild;
+            if (Model != null)
+            {
+                Model.Rebuilt -= Rebuild;
+                Model.MarkerAdded -= OnMarkerAdded;
+                Model.MarkerRemoved -= OnMarkerRemoved;
+                Model.RouteAdded -= OnRouteAdded;
+                Model.RouteRemoved -= OnRouteRemoved;
+            }
             if (_root != null) _root.gameObject.SetActive(false);
+        }
+
+        // A single marker or route only adds or destroys its own objects. Before
+        // the overlay root exists there is nothing to update incrementally, so
+        // the full build runs instead.
+        private void OnMarkerAdded(UserMarker marker)
+        {
+            if (_root == null) Rebuild();
+            else WallModelVisualizer.BuildMarker(_root, marker);
+        }
+
+        private void OnMarkerRemoved(int markerId)
+        {
+            if (_root != null) WallModelVisualizer.DestroyMarker(_root, markerId);
+        }
+
+        private void OnRouteAdded(PlannedRoute route)
+        {
+            if (_root == null) Rebuild();
+            else WallModelVisualizer.BuildRoute(_root, route);
+        }
+
+        private void OnRouteRemoved(int routeId)
+        {
+            if (_root != null) WallModelVisualizer.DestroyRoute(_root, routeId);
         }
 
         private void Rebuild()
